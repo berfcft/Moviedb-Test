@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "5be419bb-8e5a-496a-a187-4092cbc09cfd",
+		"name": "GetRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39946389"
+	},
+	"item": [
+		{
+			"name": "MovieDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response should have a status of 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain movie details\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Check if the response contains the 'id' field\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"\r",
+							"    // Check if the response contains the 'title' field\r",
+							"    pm.expect(jsonData).to.have.property(\"title\");\r",
+							"\r",
+							"    // Check if the response contains the 'release_date' field\r",
+							"    pm.expect(jsonData).to.have.property(\"release_date\");\r",
+							"\r",
+							"    // Check if the 'id' is a number\r",
+							"    pm.expect(jsonData.id).to.be.a('number');\r",
+							"\r",
+							"    // Check if the 'title' is a string\r",
+							"    pm.expect(jsonData.title).to.be.a('string');\r",
+							"\r",
+							"    // Check if the 'release_date' is a string (valid format should be checked further)\r",
+							"    pm.expect(jsonData.release_date).to.be.a('string');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/{{movie_id}}?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"{{movie_id}}"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MovieReviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/{{movie_id}}/reviews?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"{{movie_id}}",
+						"reviews"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MoviesByListId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/list/{{list_id}}?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"list",
+						"{{list_id}}"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccountDetails",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response should have a status of 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain account details\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Check if the response contains the 'id' field\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"\r",
+							"    // Check if the response contains the 'username' field\r",
+							"    pm.expect(jsonData).to.have.property(\"username\");\r",
+							"\r",
+							"    // Check if the 'id' is a number\r",
+							"    pm.expect(jsonData.id).to.be.a('number');\r",
+							"\r",
+							"    // Check if the 'username' is a string\r",
+							"    pm.expect(jsonData.username).to.be.a('string');\r",
+							"\r",
+							"    // Optionally, check for other fields, for example, 'email', 'name', etc.\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");  // Check if 'name' exists\r",
+							"    pm.expect(jsonData.name).to.be.a('string');     // Check if 'name' is a string\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDJlMjE5OGFiNDYwNGU1NDJjOWE3NTI3YjFjNDgxYyIsIm5iZiI6MTczNDgwMjY4My44NTc5OTk4LCJzdWIiOiI2NzY2ZmNmYjFiMDZjNWYyOGI3NGJmNmYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.MUwpm7Xd65nnFbtUzYDAmyXzQyrpWNrumX0coDnOqJk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/account?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"account"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PopularMovies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code should be 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response should be in JSON format\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"pm.test(\"Response should contain 'results' field\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"results\");\r",
+							"});\r",
+							"pm.test(\"Results array should not be empty\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.results).to.have.lengthOf.above(0);\r",
+							"});\r",
+							"pm.test(\"Each movie should have 'id', 'title', and 'vote_average' fields\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    jsonData.results.forEach(movie => {\r",
+							"        pm.expect(movie).to.have.property(\"id\");\r",
+							"        pm.expect(movie).to.have.property(\"title\");\r",
+							"        pm.expect(movie).to.have.property(\"vote_average\");\r",
+							"    });\r",
+							"});\r",
+							"pm.test(\"Should not receive an invalid API key error\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.not.have.property(\"status_code\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/popular?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"popular"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "4424fc6a-611f-40b7-80c0-d0a015d44572",
+		"name": "DeleteRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39946389"
+	},
+	"item": [
+		{
+			"name": "DeleteListByListId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response should have a status of 200 for successful deletion\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response should contain a 'success' message\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Check if the response contains the 'success' field\r",
+							"    pm.expect(jsonData).to.have.property(\"success\");\r",
+							"\r",
+							"    // Ensure the 'success' field is true, indicating the list was deleted\r",
+							"    pm.expect(jsonData.success).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDJlMjE5OGFiNDYwNGU1NDJjOWE3NTI3YjFjNDgxYyIsIm5iZiI6MTczNDgwMjY4My44NTc5OTk4LCJzdWIiOiI2NzY2ZmNmYjFiMDZjNWYyOGI3NGJmNmYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.MUwpm7Xd65nnFbtUzYDAmyXzQyrpWNrumX0coDnOqJk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/list/{{list_id}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"list",
+						"{{list_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

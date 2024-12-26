@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "ad89694e-265d-48f7-b78b-2bc92ce376fd",
+		"name": "PostRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39946389"
+	},
+	"item": [
+		{
+			"name": "AddMovieToFavourites",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDJlMjE5OGFiNDYwNGU1NDJjOWE3NTI3YjFjNDgxYyIsIm5iZiI6MTczNDgwMjY4My44NTc5OTk4LCJzdWIiOiI2NzY2ZmNmYjFiMDZjNWYyOGI3NGJmNmYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.MUwpm7Xd65nnFbtUzYDAmyXzQyrpWNrumX0coDnOqJk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"media_type\": \"movie\",\r\n  \"media_id\": {{movie_id}},\r\n  \"favorite\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/account/{{account_id}}/favorite?api_key={{api_key}}\n",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"account",
+						"{{account_id}}",
+						"favorite"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}\n"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateNewWatchList",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test(\"Request body should contain 'media_type', 'media_id', and 'watchlist'\", function () {\r",
+							"    var requestBody = pm.request.body.raw;\r",
+							"    var jsonData = JSON.parse(requestBody);\r",
+							"\r",
+							"    // Check if the required fields are present in the request body\r",
+							"    pm.expect(jsonData).to.have.property(\"media_type\");\r",
+							"    pm.expect(jsonData).to.have.property(\"media_id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"watchlist\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDJlMjE5OGFiNDYwNGU1NDJjOWE3NTI3YjFjNDgxYyIsIm5iZiI6MTczNDgwMjY4My44NTc5OTk4LCJzdWIiOiI2NzY2ZmNmYjFiMDZjNWYyOGI3NGJmNmYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.MUwpm7Xd65nnFbtUzYDAmyXzQyrpWNrumX0coDnOqJk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"media_type\": \"movie\",\r\n  \"media_id\": {{movie_id}},\r\n  \"watchlist\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/account/{{account_id}}/watchlist?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"account",
+						"{{account_id}}",
+						"watchlist"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RateMovie",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test(\"Request body should contain 'value' field\", function () {\r",
+							"    var requestBody = pm.request.body.raw;\r",
+							"    var jsonData = JSON.parse(requestBody);\r",
+							"\r",
+							"    // Check if the 'value' field is present in the request body\r",
+							"    pm.expect(jsonData).to.have.property(\"value\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDJlMjE5OGFiNDYwNGU1NDJjOWE3NTI3YjFjNDgxYyIsIm5iZiI6MTczNDgwMjY4My44NTc5OTk4LCJzdWIiOiI2NzY2ZmNmYjFiMDZjNWYyOGI3NGJmNmYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.MUwpm7Xd65nnFbtUzYDAmyXzQyrpWNrumX0coDnOqJk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"value\":\"7\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/{{movie_id}}/rating?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"{{movie_id}}",
+						"rating"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddMovieToList",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test(\"Request body should contain 'media_id' field\", function () {\r",
+							"    var requestBody = pm.request.body.raw;\r",
+							"    var jsonData = JSON.parse(requestBody);\r",
+							"\r",
+							"    // Check if the 'media_id' field is present in the request body\r",
+							"    pm.expect(jsonData).to.have.property(\"media_id\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDJlMjE5OGFiNDYwNGU1NDJjOWE3NTI3YjFjNDgxYyIsIm5iZiI6MTczNDgwMjY4My44NTc5OTk4LCJzdWIiOiI2NzY2ZmNmYjFiMDZjNWYyOGI3NGJmNmYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.MUwpm7Xd65nnFbtUzYDAmyXzQyrpWNrumX0coDnOqJk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"media_id\": {{movie_id}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/list/{{list_id}}/add_item?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"list",
+						"{{list_id}}",
+						"add_item"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateNewMovieList",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test(\"Request body should contain 'name', 'description', and 'iso_639_1'\", function () {\r",
+							"    var requestBody = pm.request.body.raw;\r",
+							"    var jsonData = JSON.parse(requestBody);\r",
+							"\r",
+							"    // Check if the required fields are in the request body\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData).to.have.property(\"description\");\r",
+							"    pm.expect(jsonData).to.have.property(\"iso_639_1\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZDJlMjE5OGFiNDYwNGU1NDJjOWE3NTI3YjFjNDgxYyIsIm5iZiI6MTczNDgwMjY4My44NTc5OTk4LCJzdWIiOiI2NzY2ZmNmYjFiMDZjNWYyOGI3NGJmNmYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.MUwpm7Xd65nnFbtUzYDAmyXzQyrpWNrumX0coDnOqJk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"My Test List\",\r\n  \"description\": \"This is a test movie list.\",\r\n  \"iso_639_1\": \"en\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/list?api_key={{api_key}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"list"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{api_key}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
